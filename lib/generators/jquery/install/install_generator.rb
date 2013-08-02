@@ -6,8 +6,8 @@ if ::Rails.version < "3.1" || !::Rails.application.config.assets.enabled
     module Generators
       class InstallGenerator < ::Rails::Generators::Base
 
-        desc "This generator installs jQuery #{Jquery::Rails::JQUERY_VERSION} and jQuery-ujs"
-        source_root File.expand_path('../../../../../vendor/assets/javascripts', __FILE__)
+        desc "This generator installs jQuery #{Jquery::Rails4::JQUERY_VERSION} and jQuery-ujs"
+        source_root File.expand_path('../../../../../app/assets/javascripts', __FILE__)
 
         def remove_prototype
           Rails::PROTOTYPE_JS.each do |name|
@@ -16,13 +16,13 @@ if ::Rails.version < "3.1" || !::Rails.application.config.assets.enabled
         end
 
         def copy_jquery
-          say_status("copying", "jQuery (#{Jquery::Rails::JQUERY_VERSION})", :green)
+          say_status("copying", "jQuery (#{Jquery::Rails4::JQUERY_VERSION})", :green)
           copy_file "jquery.js", "public/javascripts/jquery.js"
           copy_file "jquery.min.js", "public/javascripts/jquery.min.js"
         end
 
         def copy_ujs_driver
-          say_status("copying", "jQuery UJS adapter (#{Jquery::Rails::JQUERY_UJS_VERSION[0..5]})", :green)
+          say_status("copying", "jQuery UJS adapter (#{Jquery::Rails4::JQUERY_UJS_VERSION[0..5]})", :green)
           remove_file "public/javascripts/rails.js"
           copy_file "jquery_ujs.js", "public/javascripts/jquery_ujs.js"
         end

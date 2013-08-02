@@ -7,13 +7,13 @@ task :release => [:guard_version]
 
 task :guard_version do
   def check_version(file, pattern, constant)
-    body = File.read("vendor/assets/javascripts/#{file}")
+    body = File.read("app/assets/javascripts/#{file}")
     match = body.match(pattern) or abort "Version check failed: no pattern matched in #{file}"
     file_version = body.match(pattern)[1]
-    constant_version = Jquery::Rails.const_get(constant)
+    constant_version = Jquery::Rails4.const_get(constant)
 
     unless constant_version == file_version
-      abort "Jquery::Rails::#{constant} was #{constant_version} but it should be #{file_version}"
+      abort "Jquery::Rails4::#{constant} was #{constant_version} but it should be #{file_version}"
     end
   end
 
@@ -22,15 +22,15 @@ end
 
 task :update_jquery do
   puts "Downloading jquery.js"
-  puts `curl -o vendor/assets/javascripts/jquery.js http://code.jquery.com/jquery.js`
+  puts `curl -o app/assets/javascripts/jquery.js http://code.jquery.com/jquery.js`
   puts "Downloading jquery.min.js"
-  puts `curl -o vendor/assets/javascripts/jquery.min.js http://code.jquery.com/jquery.min.js`
+  puts `curl -o app/assets/javascripts/jquery.min.js http://code.jquery.com/jquery.min.js`
   puts "Downloading jquery.min.map"
-  puts `curl -o vendor/assets/javascripts/jquery.min.map http://code.jquery.com/jquery.min.map`
+  puts `curl -o app/assets/javascripts/jquery.min.map http://code.jquery.com/jquery.min.map`
 
   puts "Updating version.rb"
   version = false
-  File.foreach('vendor/assets/javascripts/jquery.js') do |line|
+  File.foreach('app/assets/javascripts/jquery.js') do |line|
     version = line.match(/jQuery JavaScript Library v([\S]+)/)
     version = version && version[1]
     break if version
