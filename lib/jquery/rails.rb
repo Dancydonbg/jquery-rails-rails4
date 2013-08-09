@@ -4,7 +4,7 @@ require 'jquery/rails/railtie'
 require 'jquery/rails/version'
 
 module Jquery
-  module Rails
+  module Rails4
     PROTOTYPE_JS = %w{prototype effects dragdrop controls}
   end
 end

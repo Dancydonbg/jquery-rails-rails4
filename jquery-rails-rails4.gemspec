@@ -2,7 +2,7 @@
 require File.expand_path('../lib/jquery/rails/version', __FILE__)
 
 Gem::Specification.new do |s|
-  s.name        = "jquery-rails"
+  s.name        = "jquery-rails-rails4"
   s.version     = Jquery::Rails4::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Dancy Dong"]
